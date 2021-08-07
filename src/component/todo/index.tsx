@@ -10,8 +10,8 @@ const Todo = () => {
   const tasks = useSelector((state: Array<AppState>) => state);
   const idGen = (): number => Math.floor(Math.random() * 1000);
   return (
-    <div className="cont">
-      <div className="add">
+    <div className="cont" data-testid="div">
+      <div className="add" data-testid="div">
         <input
           type="text"
           value={input}
@@ -21,6 +21,7 @@ const Todo = () => {
           }
         />
         <button
+          data-testid="add"
           type="button"
           onClick={() => {
             dispatch(add(input, idGen()));
@@ -33,9 +34,9 @@ const Todo = () => {
 
       {tasks.map((task, key: number) => {
         return (
-          <div key={key} className="t-cont">
+          <div key={key} className="t-cont" data-testid="div">
             <div>{task.task ? task.task : "No task to add here"}</div>
-            <button onClick={() => dispatch(deleteTask(task._id))}>
+            <button onClick={() => dispatch(deleteTask(task._id))} data-testid = 'delete'>
               Delete
             </button>
           </div>
