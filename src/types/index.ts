@@ -1,16 +1,19 @@
-export type Action = {
-    type: string;
-    payload:string;
-    key?: string | number | symbol | any;
-    value?: any;
-    meta?: any;
-    _id?: number;
-  };
-  export interface AppState {
-    task: string,
-    
-  }
-  export enum ActionTypes {
-    ADD = 'ADD',
-    DELETE = 'DELETE'
-  }
+export type AddActionType = {
+  type: ActionTypes.ADD;
+  payload: string;
+  _id: number;
+};
+export type DeleteActionType = {
+  type: ActionTypes.DELETE;
+  _id: number;
+};
+export interface AppState {
+  task: string,
+  _id: number
+}
+export type Action = AddActionType | DeleteActionType;
+
+export enum ActionTypes {
+  ADD = "ADD",
+  DELETE = "DELETE",
+}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add, } from "../../redux/action";
+import { add, deleteTask } from "../../redux/action";
 import "../../styles/global.scss";
 import { Action, AppState } from "../../types";
 import { Dispatch } from "redux";
@@ -8,6 +8,7 @@ const Todo = () => {
   const [input, setInput] = useState<string>("");
   const dispatch = useDispatch<Dispatch<Action>>();
   const tasks = useSelector((state: Array<AppState>) => state);
+  const idGen = (): number => Math.floor(Math.random() * 1000);
   return (
     <div className="cont">
       <div className="add">
@@ -22,7 +23,7 @@ const Todo = () => {
         <button
           type="button"
           onClick={() => {
-            dispatch(add(input));
+            dispatch(add(input, idGen()));
             console.log(tasks);
           }}
         >
@@ -34,7 +35,9 @@ const Todo = () => {
         return (
           <div key={key} className="t-cont">
             <div>{task.task ? task.task : "No task to add here"}</div>
-            <button >Delete</button>
+            <button onClick={() => dispatch(deleteTask(task._id))}>
+              Delete
+            </button>
           </div>
         );
       })}
