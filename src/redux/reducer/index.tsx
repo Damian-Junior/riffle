@@ -1,6 +1,6 @@
 import { Action, AppState, ActionTypes } from "../../types";
 
-const defaultState: Array<AppState> = [{ task: "", _id: 0 }];
+export const defaultState: Array<AppState> = [{ task: "", _id: 0 }];
 
 const taskReducer = (state: Array<AppState> = defaultState, action: Action) => {
   switch (action.type) {
