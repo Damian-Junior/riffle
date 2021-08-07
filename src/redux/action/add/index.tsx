@@ -1,6 +1,6 @@
-import { Action } from "../../../type";
+import { Action, ActionTypes } from "../../../types"
 
-export let add = (input: string) => ({
-  type: "ADD",
+export let add = (input: string): Action => ({
+  type: ActionTypes.ADD,
   payload: input,
 });

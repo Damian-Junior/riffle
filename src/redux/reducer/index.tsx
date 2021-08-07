@@ -1,14 +1,14 @@
-import { Action , AppState} from "../../type";
+import { Action , AppState, ActionTypes} from "../../types";
 
 
-const defaultState: AppState = { task: "none" };
+const defaultState: Array<AppState> = [{ task:''}];
 
-const taskReducer = (state: AppState = defaultState, action: Action) => {
+const taskReducer = (state:  Array<AppState> = defaultState, action: Action) => {
   switch (action.type) {
-    case "Add":
-        console.log(action.payload, 'reducer:::::');
-      return {...state,  task: 'it has worked' };
-    // case "DELETE":
+    case ActionTypes.ADD:
+        console.log(state);
+      return [...state,  {task: action.payload }];
+    // case ActionTypes.DELETE:
     //   return {...state};
     default:
       return state;

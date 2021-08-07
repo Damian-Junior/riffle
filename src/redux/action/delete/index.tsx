@@ -1,4 +1,6 @@
-export{}
- export let deleteTask = ()=> ({
-    type: 'DELETE'
-})
+import { ActionTypes, Action } from "../../../types"
+//  export let deleteTask = (): Action => ({
+//     type: ActionTypes.DELETE,
+
+
+// })

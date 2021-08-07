@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add } from "../../redux/action";
+import { add, } from "../../redux/action";
 import "../../styles/global.scss";
-import { AppState } from "../../type";
+import { Action, AppState } from "../../types";
+import { Dispatch } from "redux";
 const Todo = () => {
   const [input, setInput] = useState<string>("");
-  const dispatch = useDispatch();
-  const task = useSelector((state: AppState) => state.task);
-  console.log("text::::::::", task, add(input));
+  const dispatch = useDispatch<Dispatch<Action>>();
+  const tasks = useSelector((state: Array<AppState>) => state);
   return (
     <div className="cont">
-    <div className="add">
+      <div className="add">
         <input
           type="text"
           value={input}
@@ -23,16 +23,21 @@ const Todo = () => {
           type="button"
           onClick={() => {
             dispatch(add(input));
-            console.log("dispatch::::", input);
+            console.log(tasks);
           }}
         >
           Add
         </button>
       </div>
-      <div className="tCont">
-        <div className="tsk"> {task ? task : "Nothing to show here"}</div>
-        <button type="button">Delete</button>
-      </div>
+
+      {tasks.map((task, key: number) => {
+        return (
+          <div key={key} className="t-cont">
+            <div>{task.task ? task.task : "No task to add here"}</div>
+            <button >Delete</button>
+          </div>
+        );
+      })}
     </div>
   );
 };
