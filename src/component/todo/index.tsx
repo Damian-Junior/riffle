@@ -4,8 +4,10 @@ import { add, deleteTask } from "../../redux/action";
 import "../../styles/global.scss";
 import { Action, AppState } from "../../types";
 import { Dispatch } from "redux";
+import useLocalStorage from "../../hooks/useLocalStorge";
 const Todo = () => {
   const [input, setInput] = useState<string>("");
+  const [name, setName] = useLocalStorage("Axtion", "Delete");
   const dispatch = useDispatch<Dispatch<Action>>();
   const tasks = useSelector((state: Array<AppState>) => state);
   const idGen = (): number => Math.floor(Math.random() * 1000);
@@ -36,8 +38,11 @@ const Todo = () => {
         return (
           <div key={key} className="t-cont" data-testid="div">
             <div>{task.task ? task.task : "No task to add here"}</div>
-            <button onClick={() => dispatch(deleteTask(task._id))} data-testid = 'delete'>
-              Delete
+            <button
+              onClick={() => dispatch(deleteTask(task._id))}
+              data-testid="delete"
+            >
+              {name}
             </button>
           </div>
         );
