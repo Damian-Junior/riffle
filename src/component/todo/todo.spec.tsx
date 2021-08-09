@@ -1,16 +1,12 @@
 import React from "react";
 import Todo from "./index";
 import { Provider } from "react-redux";
-import {
-  cleanup,
-  screen,
-  render,
-  fireEvent,
-  getByTestId,
-} from "@testing-library/react";
+import { cleanup, screen, render, fireEvent } from "@testing-library/react";
 import { store } from "../../redux/store";
 import ReactDOM from "react-dom";
-import * as reactRedux from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../../redux/action";
+import * as redux from "react-redux";
 
 describe("Todo Componet", () => {
   afterEach(cleanup);
@@ -38,12 +34,29 @@ describe("Todo Componet", () => {
   it("should rener the add button", () => {
     expect(screen.getByTestId("add")).toHaveTextContent("Add");
   });
-  it("should call a function when the add button is clicked", () => {
+
+  xit("should not fire dipatch if the wrong function was passed when then buttin is clicked", () => {
     const onInitialValues = jest.fn();
     // create mocked useDispatch
-    const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");
+    //const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");
     fireEvent.click(screen.getByTestId("add"));
-    useDispatchMock.mockReturnValue(onInitialValues);
+    //useDispatchMock.mockReturnValue(onInitialValues);
     expect(onInitialValues).not.toHaveBeenCalled();
+  });
+
+  it("should call the add action when the add button os clicked", () => {
+    const addAction = {
+      payload: "wash my cloth",
+      _id: 1,
+    };
+
+    const { payload, _id } = addAction;
+
+    const useDispatchSpy = jest.spyOn(redux, "useDispatch");
+    const mockedDispatch = jest.fn();
+    useDispatchSpy.mockReturnValue(mockedDispatch);
+    fireEvent.click(screen.getByTestId("add"));
+    expect(useDispatchSpy).toHaveBeenCalled();
+    useDispatchSpy.mockClear();
   });
 });

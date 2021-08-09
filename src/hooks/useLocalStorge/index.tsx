@@ -8,7 +8,6 @@ let savedValue: string |null = JSON.parse(localStorage.getItem(key) as string);
 const useLocalStorage = (key: string, initialValue: string) => {
   const [value, setValue] = useState<string|null>( getValue(key, initialValue));
   
-
   useEffect(() => localStorage.setItem(key, JSON.stringify(value)), [value]);
   return [value, setValue];
 };

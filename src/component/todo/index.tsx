@@ -5,6 +5,7 @@ import "../../styles/global.scss";
 import { Action, AppState } from "../../types";
 import { Dispatch } from "redux";
 import useLocalStorage from "../../hooks/useLocalStorge";
+
 const Todo = () => {
   const [input, setInput] = useState<string>("");
   const [name, setName] = useLocalStorage("Axtion", "Delete");
