@@ -30,8 +30,27 @@ describe("Todo Componet", () => {
   it("should render div element", () => {
     expect(screen.getAllByTestId("div")).toHaveLength(3);
   });
-
-  it("should rener the add button", () => {
+  it("should render one input elment", () => {
+    expect(screen.getByTestId("input")).toBeTruthy();
+  });
+  it("should contain a div with testid input_task", () => {
+    expect(screen.getByTestId("input_task")).toBeInTheDocument();
+  });
+  it("it should the text No task to add here on page load ", () => {
+    expect(screen.getByTestId("input_task")).toHaveTextContent(
+      "No task to add here"
+    );
+  });
+  it("should render the text from the input onChange", () => {
+    fireEvent.change(screen.getByTestId("input"), {
+      target: { value: "watch all my cloth" },
+    });
+    fireEvent.click(screen.getByTestId("add"));
+    expect(screen.getAllByTestId("input_task")[1]).toHaveTextContent(
+      "watch all my cloth"
+    );
+  });
+  it("should render the add button", () => {
     expect(screen.getByTestId("add")).toHaveTextContent("Add");
   });
 
